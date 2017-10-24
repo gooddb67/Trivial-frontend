@@ -65,7 +65,7 @@ class App {
   }
 
   makeGame(data, timerVal){
-    let game = new Game(data.results, timerVal, data.results.length)
-    console.log(game)
+    let game = new Game(data.results, timerVal, data.results.length);
+    game.renderQuestions();
   }
 }
