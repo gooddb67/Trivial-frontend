@@ -4,7 +4,7 @@ class Question {
     this.difficulty = difficulty;
     this.type = type;
     this.questionText = questionText;
-    this.answers = answers;
     this.correctAnswer = correctAnswer;
+    this.correct = false
   }
 }

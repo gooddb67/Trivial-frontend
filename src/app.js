@@ -65,7 +65,15 @@ class App {
   }
 
   makeGame(data, timerVal){
-    let game = new Game(data.results, timerVal, data.results.length);
+    let questions = data.results.map((question) => {
+      let answer = question.correct_answer
+      let allAnswers = question.incorrect_answers.slice()
+      allAnswers.push(answer)
+      new Question(question.category, question.difficulty, question.type, question.question, allAnswers, question.correct_answer)
+    })
+
+    let game = new Game(questions, timerVal, data.results.length);
+    debugger
     game.renderQuestions();
   }
 }
