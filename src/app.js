@@ -66,14 +66,10 @@ class App {
 
   makeGame(data, timerVal){
     let questions = data.results.map((question) => {
-      let answer = question.correct_answer
-      let allAnswers = question.incorrect_answers.slice()
-      allAnswers.push(answer)
-      new Question(question.category, question.difficulty, question.type, question.question, allAnswers, question.correct_answer)
+      return new Question(question.category, question.difficulty, question.type, question.question, question.incorrect_answers, question.correct_answer)
+      
     })
-
     let game = new Game(questions, timerVal, data.results.length);
-    debugger
     game.renderQuestions();
   }
 }
