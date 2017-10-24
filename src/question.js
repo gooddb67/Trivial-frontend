@@ -8,6 +8,7 @@ class Question {
     this.correctAnswer = correctAnswer;
     this.incorrectAnswers = incorrectAnswers;
     this.correct = false;
+    this.constructor.all.push(this)
   }
 
   getAllAnswers(){
@@ -25,6 +26,26 @@ class Question {
     }
     return answers
   }
+
+
+  static findQuestionById(id){
+    return Question.all.find((question) =>{
+      return question.id === id
+    })
+  }
+
+  checkAnswer(answer, questionId){
+
+    let q = Question.findQuestionById(parseInt(questionId))
+    if (answer === q.correctAnswer){
+      this.correct = true
+      return true
+    }else{
+      return false
+    }
+  }
+
 }
 
+Question.all = []
 let id = 1;

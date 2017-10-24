@@ -17,18 +17,25 @@ class Game {
         let mixedAnswers = q.answerRandomizer();
         let questionHolder = document.createElement('div');
         questionHolder.dataset.id = q.id
-        questionHolder.innerHTML = 
+        questionHolder.innerHTML =
         `<p>${q.questionText}</p>
-        <ol> 
-          <a href="#" data-id="1"><li>${mixedAnswers[0]}</li></a>
-          <a href="#" data-id="2"><li>${mixedAnswers[1]}</li></a>
-          <a href="#" data-id="3"><li>${mixedAnswers[2]}</li></a>
-          <a href="#" data-id="4"><li>${mixedAnswers[3]}</li></a>
+        <ol>
+          <li><a href="#" data-id="${q.id}">${mixedAnswers[0]}</a></li>
+          <li><a href="#" data-id="${q.id}">${mixedAnswers[1]}</a></li>
+          <li><a href="#" data-id="${q.id}">${mixedAnswers[2]}</a></li>
+          <li><a href="#" data-id="${q.id}">${mixedAnswers[3]}</a></li>
         </ol>`;
         container.appendChild(questionHolder)
-      }
-    )
-  }
+        questionHolder.addEventListener('click', function(e){
+          if(e.target && e.target.nodeName === 'A'){
+            if(q.checkAnswer(e.target.innerText, e.target.dataset.id)){
+              this.numCorrect++
+              this.score++
+            }
+          }//if
+        }.bind(this))//listener
+    })//forEach
+  }//function
 
 
 
@@ -36,8 +43,5 @@ class Game {
 
   }
 
-  checkCorrectness(){
-
-  }
 
 }

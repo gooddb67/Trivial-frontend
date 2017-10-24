@@ -56,7 +56,6 @@ class App {
     const categoryValue = categorySelect.options[categorySelect.selectedIndex].dataset.id
     const difficultyValue = difficultySelect.options[difficultySelect.selectedIndex].text.toLowerCase()
 
-  //https://opentdb.com/api.php?amount=10&category=10&difficulty=easy&type=multiple
     const URL = `https://opentdb.com/api.php?amount=${questionValue}&category=${categoryValue}&difficulty=${difficultyValue}&type=multiple`
 
     fetch(`${URL}`)
@@ -67,9 +66,8 @@ class App {
   makeGame(data, timerVal){
     let questions = data.results.map((question) => {
       return new Question(question.category, question.difficulty, question.type, question.question, question.incorrect_answers, question.correct_answer)
-      
+
     })
-    console.log(questions)
     let game = new Game(questions, timerVal, data.results.length);
     game.renderQuestions();
   }
