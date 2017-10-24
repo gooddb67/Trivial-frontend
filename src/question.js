@@ -1,5 +1,6 @@
 class Question {
   constructor(category, difficulty, type, questionText, incorrectAnswers, correctAnswer){
+    this.id = id++
     this.category = category;
     this.difficulty = difficulty;
     this.type = type;
@@ -15,9 +16,9 @@ class Question {
 
   answerRandomizer(){
     let answers = this.getAllAnswers();
-    for (var i = answers.length-1; i >=0; i--) {
-      var randomIndex = Math.floor(Math.random()*(i+1));
-      var itemAtIndex = answers[randomIndex];
+    for (let i = answers.length-1; i >=0; i--) {
+      let randomIndex = Math.floor(Math.random()*(i+1));
+      let itemAtIndex = answers[randomIndex];
 
       answers[randomIndex] = answers[i];
       answers[i] = itemAtIndex;
@@ -25,3 +26,5 @@ class Question {
     return answers
   }
 }
+
+let id = 1;

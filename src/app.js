@@ -69,6 +69,7 @@ class App {
       return new Question(question.category, question.difficulty, question.type, question.question, question.incorrect_answers, question.correct_answer)
       
     })
+    console.log(questions)
     let game = new Game(questions, timerVal, data.results.length);
     game.renderQuestions();
   }
