@@ -1,0 +1,14 @@
+#header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "#title #score #timer"
+}
+
+#title {
+
+}
+
+#score-timer {
+
+}

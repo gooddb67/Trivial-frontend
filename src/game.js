@@ -10,7 +10,8 @@ class Game {
 
   renderQuestions(){
     const container = document.getElementById('main-container')
-
+    this.renderScore();
+    this.renderTimer();
     container.innerHTML = ''
     this.questions.forEach(
       q => {
@@ -31,13 +32,23 @@ class Game {
             if(q.checkAnswer(e.target.innerText, e.target.dataset.id)){
               this.numCorrect++
               this.score++
+              console.log(q)
+              this.renderScore();
             }
           }//if
         }.bind(this))//listener
     })//forEach
   }//function
 
+  renderScore(){
+    let score = document.getElementById('score');
+    score.innerHTML = `<h1>Score: ${this.score}</h1>`
+  }
 
+  renderTimer(){
+    let timer = document.getElementById('timer');
+    timer.innerHTML = `<h1>Timer: ${this.timer}</h1>`
+  }
 
   decrementTimer(){
 
