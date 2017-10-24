@@ -69,6 +69,6 @@ class App {
 
     })
     let game = new Game(questions, timerVal, data.results.length);
-    game.renderQuestions();
+    game.renderGame();
   }
 }

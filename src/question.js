@@ -11,6 +11,20 @@ class Question {
     this.constructor.all.push(this)
   }
 
+  renderQuestion(containingEl, childEl){
+    let mixedAnswers = this.answerRandomizer();
+    childEl.dataset.id = this.id
+    childEl.innerHTML =
+    `<p>${this.questionText}</p>
+    <ol>
+      <li><a href="#" data-id="${this.id}">${mixedAnswers[0]}</a></li>
+      <li><a href="#" data-id="${this.id}">${mixedAnswers[1]}</a></li>
+      <li><a href="#" data-id="${this.id}">${mixedAnswers[2]}</a></li>
+      <li><a href="#" data-id="${this.id}">${mixedAnswers[3]}</a></li>
+    </ol>`;
+    containingEl.appendChild(childEl)
+  }
+
   getAllAnswers(){
     return this.incorrectAnswers.concat(this.correctAnswer)
   }
@@ -27,6 +41,16 @@ class Question {
     return answers
   }
 
+  delegateAndCheck(gameInstance, ev){
+    if(ev.target && ev.target.nodeName === 'A'){
+      if(this.checkAnswer(ev.target.innerText, ev.target.dataset.id)){
+        gameInstance.numCorrect++
+        gameInstance.score++
+        console.log(this)
+        gameInstance.renderScore();
+      }
+    }
+  }
 
   static findQuestionById(id){
     return Question.all.find((question) =>{
