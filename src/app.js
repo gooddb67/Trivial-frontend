@@ -1,51 +1,50 @@
 class App {
   constructor(){
+  }
+
+  renderForm(){
+  const container = document.getElementById('main-container')
+  container.innerHTML = `<form id="game-form">
+        <label for="category">Select Category</label>
+        <select id="category-select"></select><br>
+
+        <label for="difficulty">Select Difficulty</label>
+        <select id="difficulty-select">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select><br>
+        <label for="time">Set Time (in seconds)</label>
+        <input type="number" name="time" min="1" max="480" id="time-amount" value="50"><br>
+        <label for="questions">How many questions?</label>
+        <input type="number" name="questions" min="1" max="50" id="question-amount" value="10"><br>
+        <input type="submit">
+      </form>`
 
   }
 
   fetchCategories(){
-  fetch('https://opentdb.com/api_category.php')
-  .then(res => res.json())
-  .then(json => addCategories(json.trivia_categories))
-  }
-
-  renderForm(){
-    const container = document.getElementById('main-container')
-    container.innerHTML = `<form id="game-form">
-          <label for="category">Select Category</label>
-          <select id="category-select"></select><br>
-
-          <label for="difficulty">Select Difficulty</label>
-          <select id="difficulty-select">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select><br>
-          <label for="time">Set Time (in seconds)</label>
-          <input type="number" name="time" min="1" max="480" id="time-amount" value="50"><br>
-          <label for="questions">How many questions?</label>
-          <input type="number" name="questions" min="1" max="50" id="question-amount" value="10"><br>
-          <input type="submit">
-        </form>`
-
+    fetch('https://opentdb.com/api_category.php')
+    .then(res => res.json())
+    .then(json => this.addCategories(json.trivia_categories))
   }
 
   addCategories(categories){
     const categorySelect = document.getElementById("category-select")
-    for(i = 0; i < 5; i++){
+    for(let i = 0; i < 5; i++){
       let categoryHolder = document.createElement('option')
       categoryHolder.dataset.id = categories[i].id
       categoryHolder.innerText = categories[i].name
       categorySelect.appendChild(categoryHolder)
     }
-    addFormListener()
+    this.addFormListener()
   }
 
   addFormListener(){
     const newGame = document.getElementById("game-form")
     newGame.addEventListener('submit', function(e){
-      fetchGame(e)
-    })
+      this.fetchGame(e)
+    }.bind(this))
   }
 
   fetchGame(e){
@@ -62,7 +61,11 @@ class App {
 
     fetch(`${URL}`)
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(json => this.makeGame(json, timeValue))
   }
 
+  makeGame(data, timerVal){
+    let game = new Game(data.results, timerVal, data.results.length)
+    console.log(game)
+  }
 }
