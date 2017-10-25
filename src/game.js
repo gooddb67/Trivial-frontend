@@ -52,8 +52,7 @@ class Game {
         clearInterval(decTimer)
         this.postGameResults()
         alert("YOU DID IT")
-        location.reload
-        alert
+        location.reload()
       } else {
         +el.innerText--
         timer--
