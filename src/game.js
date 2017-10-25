@@ -38,8 +38,8 @@ class Game {
 
   renderTimer(){
     let domTimer = document.getElementById('timer');
-    domTimer.innerHTML = `<h1>${this.timer}</h1>`
-    let timerHolder = domTimer.firstChild
+    domTimer.innerHTML = `<h1>Timer: <span>${this.timer}</span></h1>`
+    let timerHolder = document.querySelector("#timer h1 span")
     this.decrementTimer(this.timer, timerHolder)
   }
 
