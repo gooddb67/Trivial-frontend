@@ -52,12 +52,33 @@ class Game {
         clearInterval(decTimer)
         this.postGameResults()
         alert("YOU DID IT")
-        location.reload()
+        this.renderGameResults()
       } else {
         +el.innerText--
         timer--
       }
     }.bind(this), 1000)
+  }
+
+  renderGameResults(){
+    const container = document.getElementById('main-container')
+    const gameResults = document.createElement('div')
+    gameResults.setAttribute('class', 'game-results')
+    container.appendChild(gameResults)
+    const headingContainer = document.createElement('h2')
+    headingContainer.innerText = "Game Results"
+    gameResults.appendChild(headingContainer)
+
+    const score = document.createElement('p')
+    score.innerText = `Score: ${this.numCorrect}/${this.numQuestions}`;
+    const timer = document.createElement('p')
+    timer.innerText = `Time Set: ${this.timer}`;
+    const difficulty = document.createElement('p')
+    difficulty.innerText = `Difficulty: ${this.difficulty}`
+
+    gameResults.appendChild(score)
+    gameResults.appendChild(timer)
+    gameResults.appendChild(difficulty)
   }
 
   postGameResults(){
@@ -73,7 +94,7 @@ class Game {
         score: this.score,
         user_id: this.user.id
         })
-      }) 
+      })
     .then(res => res.json())
     .then(console.log)
   }
