@@ -2,13 +2,49 @@ class App {
   constructor(){
   }
 
-  renderForm(){
-  const container = document.getElementById('main-container')
-  // const score = document.getElementById('score')
-  // const timer = document.getElementById('timer')
-  // container.innerHTML = ''
+  renderUserForm(){
+    const container = document.getElementById('main-container')
+    container.innerHTML = `
+    <form id='user-form'>
+    <label>Enter username: </label>
+    <input type="text" name="username" id="user-input">
+    <input type="submit"> 
+    </form>`
+    this.sendFetchPost();
+  }
 
-  container.innerHTML = `<form id="game-form">
+  sendFetchPost(){
+    const userForm = document.getElementById('user-form')
+    const input = document.getElementById('user-input')
+    userForm.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      fetch('http://127.0.0.1:3000/api/v1/users', {
+        method: 'POST',
+        body: JSON.stringify({username: `${input.value}`}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(console.log)
+    })
+
+  }
+
+
+  renderAndFetchGameForm(){
+    this.renderGameForm();
+    this.fetchCategories();
+  }
+
+  renderGameForm(){
+    const container = document.getElementById('main-container')
+    // const score = document.getElementById('score')
+    // const timer = document.getElementById('timer')
+    container.innerHTML = ''
+
+    container.innerHTML = `<form id="game-form">
         <label for="category">Select Category</label>
         <select id="category-select"></select><br>
 
