@@ -1,5 +1,6 @@
 body {
   font-size: 1.5em;
+  background-color: coral;
 }
 
 select {
@@ -7,7 +8,13 @@ select {
 }
 
 input {
-  font-size: 0.9em; 
+  border-radius: 10px;
+  box-shadow: 0;
+  font-size: 0.9em;
+}
+
+input:focus {
+  outline: none;
 }
 
 label {
@@ -24,7 +31,7 @@ label {
 }
 
 #title {
-
+  font-family: tahoma;
 }
 
 #score-timer {
