@@ -38,9 +38,14 @@ label {
 
 }
 
-#main-container {
-  width: 60%;
+#wrapper {
+  width: 70%;
   margin: 0 auto;
+}
+
+#main-container {
+  padding: 25px;
+  height: 1000px;
 }
 
 .question {
