@@ -11,7 +11,7 @@ class Game {
   renderGame(){
     const container = document.getElementById('main-container')
     this.renderScore();
-    this.renderTimer();
+
     container.innerHTML = ''
     this.questions.forEach(
       q => {
@@ -22,6 +22,7 @@ class Game {
           questionHolder.remove();
       }.bind(this))
     })//forEach
+    this.renderTimer();
   }//function
 
   renderScore(){
@@ -30,12 +31,21 @@ class Game {
   }
 
   renderTimer(){
-    let timer = document.getElementById('timer');
-    timer.innerHTML = `<h1>Timer: ${this.timer}</h1>`
+    let domTimer = document.getElementById('timer');
+    domTimer.innerHTML = `<h1>${this.timer}</h1>`
+    let timerHolder = domTimer.firstChild
+    this.decrementTimer(this.timer, timerHolder)
   }
 
-  decrementTimer(){
-
+  decrementTimer(timer, el){
+  let decTimer = setInterval(function(){
+      if(timer === 0){
+        clearInterval(decTimer)
+      }else{
+        +el.innerText--
+        timer--
+      }
+    }, 1000)
   }
 
 
