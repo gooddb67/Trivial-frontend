@@ -116,7 +116,7 @@ class App {
 
     })
     let game = new Game(questions, timerVal, data.results.length, this, this.user);
-    this.game = game
+    game.assignGameToQuestions();
     this.user.game = game
     game.renderGame();
   }

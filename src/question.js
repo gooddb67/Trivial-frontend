@@ -7,6 +7,7 @@ class Question {
     this.questionText = questionText;
     this.correctAnswer = correctAnswer;
     this.incorrectAnswers = incorrectAnswers;
+    this.game = null;
     this.correct = false;
     this.constructor.all.push(this)
   }

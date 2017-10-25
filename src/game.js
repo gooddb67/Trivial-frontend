@@ -4,9 +4,11 @@ class Game {
     this.timer = timer;
     this.score = 0;
     this.numQuestions = numQuestions;
+    this.numAnsweredQuestions = 0;
     this.numCorrect = 0;
-    this.app = app
-    this.user = user
+    this.app = app;
+    this.user = user;
+    this.gameComplete = false;
   }
 
   renderGame(){
@@ -19,12 +21,12 @@ class Game {
         let questionHolder = document.createElement('div');
         q.renderQuestion(container, questionHolder);
         questionHolder.addEventListener('click', function(e){
+          q.game.numAnsweredQuestions++
           q.delegateAndCheck(this, e);
           questionHolder.remove();
       }.bind(this))
     })//forEach
     this.renderTimer();
-    console.log(this)
   }//function
 
   renderScore(){
@@ -43,15 +45,44 @@ class Game {
   let decTimer = setInterval(function(){
       if(timer === 0){
         clearInterval(decTimer)
-        this.stopInput()
-      }else{
+        this.postGameResults()
+        this.timesUp()
+      } else if (timer !== 0 && this.numQuestions === this.numAnsweredQuestions){
+        clearInterval(decTimer)
+        this.postGameResults()
+        alert("YOU DID IT")
+        location.reload
+        alert
+      } else {
         +el.innerText--
         timer--
       }
     }.bind(this), 1000)
   }
 
-  stopInput(){
+  postGameResults(){
+    fetch('http://127.0.0.1:3000/api/v1/games', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        id: this.id,
+        time: +this.timer,
+        difficulty: this.difficulty,
+        score: this.score,
+        user: {
+          id: this.user.id,
+          username: this.user.username
+        }
+      }) 
+    })
+    .then(res => res.json())
+    .then(console.log)
+  }
+
+  timesUp(){
     const answerLinks = document.getElementsByClassName('answer-link')
     Array.from(answerLinks).forEach(function(link){
       let text = link.innerText
@@ -60,6 +91,10 @@ class Game {
     alert("Sorry, you ran out of time! Please start again.");
     // push results to rails api
     location.reload();
+  }
+
+  assignGameToQuestions(){
+    this.questions.forEach(q => q.game = this)
   }
 
 }
