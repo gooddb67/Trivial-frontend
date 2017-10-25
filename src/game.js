@@ -41,12 +41,23 @@ class Game {
   let decTimer = setInterval(function(){
       if(timer === 0){
         clearInterval(decTimer)
+        this.stopInput()
       }else{
         +el.innerText--
         timer--
       }
-    }, 1000)
+    }.bind(this), 1000)
   }
 
+  stopInput(){
+    const answerLinks = document.getElementsByClassName('answer-link')
+    Array.from(answerLinks).forEach(function(link){
+      let text = link.innerText
+      link.parentNode.innerHTML = `<span>${text}</span>`
+    })
+    alert("Sorry, you ran out of time! Please start again.");
+    // push results to rails api
+    location.reload();
+  }
 
 }

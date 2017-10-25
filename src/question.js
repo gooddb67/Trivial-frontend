@@ -17,10 +17,10 @@ class Question {
     childEl.innerHTML =
     `<p>${this.questionText}</p>
     <ol>
-      <li><a href="#" data-id="${this.id}">${mixedAnswers[0]}</a></li>
-      <li><a href="#" data-id="${this.id}">${mixedAnswers[1]}</a></li>
-      <li><a href="#" data-id="${this.id}">${mixedAnswers[2]}</a></li>
-      <li><a href="#" data-id="${this.id}">${mixedAnswers[3]}</a></li>
+      <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[0]}</a></li>
+      <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[1]}</a></li>
+      <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[2]}</a></li>
+      <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[3]}</a></li>
     </ol>`;
     containingEl.appendChild(childEl)
   }

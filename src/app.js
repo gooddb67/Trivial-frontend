@@ -4,6 +4,10 @@ class App {
 
   renderForm(){
   const container = document.getElementById('main-container')
+  // const score = document.getElementById('score')
+  // const timer = document.getElementById('timer')
+  // container.innerHTML = ''
+
   container.innerHTML = `<form id="game-form">
         <label for="category">Select Category</label>
         <select id="category-select"></select><br>
