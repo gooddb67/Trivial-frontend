@@ -18,7 +18,8 @@ class Game {
         let questionHolder = document.createElement('div');
         q.renderQuestion(container, questionHolder);
         questionHolder.addEventListener('click', function(e){
-          q.delegateAndCheck(this, e)
+          q.delegateAndCheck(this, e);
+          questionHolder.remove();
       }.bind(this))
     })//forEach
   }//function
