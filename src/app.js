@@ -1,5 +1,7 @@
 class App {
   constructor(){
+    this.game = null
+    this.user = null
   }
 
   renderUserForm(){
@@ -8,9 +10,10 @@ class App {
     <form id='user-form'>
     <label>Enter username: </label>
     <input type="text" name="username" id="user-input">
-    <input type="submit"> 
+    <input type="submit">
     </form>`
-    this.sendFetchPost();
+
+    this.sendFetchPost()
   }
 
   sendFetchPost(){
@@ -27,11 +30,14 @@ class App {
         }
       })
       .then(res => res.json())
-      .then(console.log)
-    })
+      .then(user => {
+        let curUser = new User(user.id, user.username)
+        this.user = curUser
+        this.renderAndFetchGameForm()
+      })
+    }.bind(this))
 
   }
-
 
   renderAndFetchGameForm(){
     this.renderGameForm();
@@ -80,6 +86,7 @@ class App {
     this.addFormListener()
   }
 
+
   addFormListener(){
     const newGame = document.getElementById("game-form")
     newGame.addEventListener('submit', function(e){
@@ -108,7 +115,9 @@ class App {
       return new Question(question.category, question.difficulty, question.type, question.question, question.incorrect_answers, question.correct_answer)
 
     })
-    let game = new Game(questions, timerVal, data.results.length);
+    let game = new Game(questions, timerVal, data.results.length, this, this.user);
+    this.game = game
+    this.user.game = game
     game.renderGame();
   }
 }
