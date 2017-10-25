@@ -20,6 +20,7 @@ class Game {
     this.questions.forEach(
       q => {
         let questionHolder = document.createElement('div');
+        questionHolder.className = 'question' // added
         q.renderQuestion(container, questionHolder);
         questionHolder.addEventListener('click', function(e){
           q.game.numAnsweredQuestions++

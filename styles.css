@@ -1,3 +1,21 @@
+body {
+  font-size: 1.5em;
+}
+
+select {
+  font-size: 0.9em;
+}
+
+input {
+  font-size: 0.9em; 
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+
 #header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -11,4 +29,16 @@
 
 #score-timer {
 
+}
+
+#main-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.question {
+
+}
+
+.game-results {
 }
