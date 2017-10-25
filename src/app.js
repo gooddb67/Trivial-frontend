@@ -115,7 +115,7 @@ class App {
       return new Question(question.category, question.difficulty, question.type, question.question, question.incorrect_answers, question.correct_answer)
 
     })
-    let game = new Game(questions, timerVal, data.results.length, this, this.user);
+    let game = new Game(questions, questions[0].difficulty, timerVal, data.results.length, this, this.user);
     game.assignGameToQuestions();
     this.user.game = game
     game.renderGame();

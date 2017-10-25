@@ -1,8 +1,9 @@
 class Game {
-  constructor(questions, timer, numQuestions, app, user){
+  constructor(questions, difficulty, timer, numQuestions, app, user){
     this.questions = questions;
     this.timer = timer;
     this.score = 0;
+    this.difficulty = difficulty;
     this.numQuestions = numQuestions;
     this.numAnsweredQuestions = 0;
     this.numCorrect = 0;
@@ -68,16 +69,12 @@ class Game {
           'Accept': 'application/json'
       },
       body: JSON.stringify({
-        id: this.id,
         time: +this.timer,
         difficulty: this.difficulty,
         score: this.score,
-        user: {
-          id: this.user.id,
-          username: this.user.username
-        }
+        user_id: this.user.id
+        })
       }) 
-    })
     .then(res => res.json())
     .then(console.log)
   }
