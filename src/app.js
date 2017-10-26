@@ -55,7 +55,7 @@ class App {
       })
       .then(res => res.json())
       .then(user => {
-        let curUser = new User(user.id, user.username)
+        let curUser = new User(user.id, user.username, user.games)
         this.user = curUser
         this.renderAndFetchGameForm()
       })

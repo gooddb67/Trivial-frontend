@@ -79,18 +79,18 @@ class Game {
     interiorDiv.setAttribute('class', 'card')
     container.innerHTML = ''
 
+    let allTime = this.user.allTimeStats()
+
     gameResults.innerHTML = `
     <h2>Game Results</h2>
     <p>Score: ${this.numCorrect}/${this.numQuestions}</p>
     <p>Time Set: ${this.timer}</p>
     <p>Difficulty: ${this.difficulty}</p>  
     `
-
+    console.log(allTime)
     allGameResults.innerHTML = `
-    <h2>All-Time Results</h2>
-    <p>Score: ${this.numCorrect}/${this.numQuestions}</p>
-    <p>Time Set: ${this.timer}</p>
-    <p>Difficulty: ${this.difficulty}</p>
+    <h2>Win Percentage</h2>
+    <p id="big-num">${Math.floor(allTime.correct/allTime.questions * 100)}%</p>
     `
 
     container.appendChild(interiorDiv)
@@ -110,7 +110,9 @@ class Game {
         time: +this.timer,
         difficulty: this.difficulty,
         score: this.score,
-        user_id: this.user.id
+        user_id: this.user.id,
+        num_questions: this.numQuestions,
+        num_correct: this.numCorrect
         })
       })
     .then(res => res.json())

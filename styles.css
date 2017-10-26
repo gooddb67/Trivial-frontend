@@ -56,6 +56,9 @@ a:hover {
 
 }
 
+#big-num {
+  font-size: 3em;
+}
 
 #header {
   display: grid;
@@ -107,3 +110,4 @@ a:hover {
   float: left;
 
 }
+
