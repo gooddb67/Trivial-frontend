@@ -19,6 +19,7 @@ class Game {
     container.innerHTML = ''
     this.questions.forEach(
       q => {
+        console.log(q)
         let questionHolder = document.createElement('div');
         questionHolder.className = 'question' // added
         q.renderQuestion(container, questionHolder);

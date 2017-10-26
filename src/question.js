@@ -26,21 +26,6 @@ class Question {
     containingEl.appendChild(childEl)
   }
 
-
-  // renderQuestion(containingEl, childEl){
-  //   let mixedAnswers = this.answerRandomizer();
-  //   childEl.dataset.id = this.id
-  //   childEl.innerHTML =
-  //   `<p>${this.questionText}</p>
-  //   <ol>
-  //     <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[0]}</a></li>
-  //     <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[1]}</a></li>
-  //     <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[2]}</a></li>
-  //     <li><a href="#" class="answer-link" data-id="${this.id}">${mixedAnswers[3]}</a></li>
-  //   </ol>`;
-  //   containingEl.appendChild(childEl)
-  // }
-
   getAllAnswers(){
     return this.incorrectAnswers.concat(this.correctAnswer)
   }
@@ -57,10 +42,6 @@ class Question {
     return answers
   }
 
-  // delegateAndCheck(gameInstance, ev){
-  //
-  // }
-
   static findQuestionById(id){
     return Question.all.find((question) =>{
       return question.id === id
@@ -70,7 +51,7 @@ class Question {
   checkAnswer(answer, questionId){
 
     let q = Question.findQuestionById(parseInt(questionId))
-    if (answer === q.correctAnswer){
+    if (escapeHtmlEntities(answer) === q.correctAnswer){
       this.correct = true
       return true
     }else{
