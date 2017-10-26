@@ -19,7 +19,7 @@ class Game {
     container.innerHTML = ''
     this.questions.forEach(
       q => {
-        console.log(q)
+        // console.log(q)
         let questionHolder = document.createElement('div');
         questionHolder.className = 'question' // added
         q.renderQuestion(container, questionHolder);
@@ -107,7 +107,7 @@ class Game {
         })
       })
     .then(res => res.json())
-    .then(console.log)
+    // .then(console.log)
   }
 
   timesUp(){
@@ -130,7 +130,9 @@ class Game {
     const container = document.getElementById('main-container');
     container.appendChild(restartLink);
 
-
+    restartLink.addEventListener('click', function(e){
+      this.app.renderAndFetchGameForm()
+    }.bind(this))
   }
 
 }

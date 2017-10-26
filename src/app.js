@@ -2,6 +2,31 @@ class App {
   constructor(){
     this.game = null
     this.user = null
+    this.categories = [
+    {
+      "id": 9,
+      "name": "General Knowledge"
+    },
+    {
+      "id": 10,
+      "name": "Entertainment: Books"
+    },
+    {
+      "id": 11,
+      "name": "Entertainment: Film"
+    },
+    {
+      "id": 12,
+      "name": "Entertainment: Music"
+    },
+    {
+      "id": 21,
+      "name": "Sports"
+    },
+    {
+      "id": 23,
+      "name": "History"
+    }]
   }
 
   renderUserForm(){
@@ -40,19 +65,24 @@ class App {
 
   renderAndFetchGameForm(){
     this.renderGameForm();
-    this.fetchCategories();
+    this.addFormListener()
   }
 
   renderGameForm(){
     const container = document.getElementById('main-container')
-    // const score = document.getElementById('score')
-    // const timer = document.getElementById('timer')
+
     container.innerHTML = ''
 
     container.innerHTML = `<form id="game-form">
         <label for="category">Select Category</label>
-        <select id="category-select"></select><br>
-
+        <select id="category-select">
+          <option data-id="9">General Knowledge</option>
+          <option data-id="10">Books</option>
+          <option data-id="11">Film</option>
+          <option data-id="12">Music</option>
+          <option data-id="21">Sports</option>
+          <option data-id="23">History</option>
+        </select><br>
         <label for="difficulty">Select Difficulty</label>
         <select id="difficulty-select">
           <option value="easy">Easy</option>
@@ -67,24 +97,6 @@ class App {
       </form>`
 
   }
-
-  fetchCategories(){
-    fetch('https://opentdb.com/api_category.php')
-    .then(res => res.json())
-    .then(json => this.addCategories(json.trivia_categories))
-  }
-
-  addCategories(categories){
-    const categorySelect = document.getElementById("category-select")
-    for(let i = 0; i < 4; i++){
-      let categoryHolder = document.createElement('option')
-      categoryHolder.dataset.id = categories[i].id
-      categoryHolder.innerText = categories[i].name
-      categorySelect.appendChild(categoryHolder)
-    }
-    this.addFormListener()
-  }
-
 
   addFormListener(){
     const newGame = document.getElementById("game-form")
@@ -115,8 +127,10 @@ class App {
 
     })
     let game = new Game(questions, questions[0].difficulty, timerVal, data.results.length, this, this.user);
+    console.log(this)
     game.assignGameToQuestions();
     this.user.game = game
+    this.game = game
     game.renderGame();
   }
 }
