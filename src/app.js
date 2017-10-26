@@ -8,8 +8,7 @@ class App {
     const container = document.getElementById('main-container')
     container.innerHTML = `
     <form id='user-form'>
-    <label>Enter username: </label>
-    <input type="text" name="username" id="user-input">
+    <input type="text" name="username" id="user-input" placeholder="Username">
     <input type="submit">
     </form>`
 
@@ -77,7 +76,7 @@ class App {
 
   addCategories(categories){
     const categorySelect = document.getElementById("category-select")
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 4; i++){
       let categoryHolder = document.createElement('option')
       categoryHolder.dataset.id = categories[i].id
       categoryHolder.innerText = categories[i].name

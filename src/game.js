@@ -23,9 +23,17 @@ class Game {
         questionHolder.className = 'question' // added
         q.renderQuestion(container, questionHolder);
         questionHolder.addEventListener('click', function(e){
-          q.game.numAnsweredQuestions++
-          q.delegateAndCheck(this, e);
-          questionHolder.remove();
+          if(e.target && e.target.nodeName === 'A'){
+
+            if(q.checkAnswer(e.target.innerText, e.target.dataset.id)){
+              q.game.numCorrect++
+              q.game.score++
+              q.game.renderScore();
+            }
+            questionHolder.remove();
+            q.game.numAnsweredQuestions++
+          }
+
       }.bind(this))
     })//forEach
     this.renderTimer();
@@ -65,6 +73,7 @@ class Game {
     const container = document.getElementById('main-container')
     const gameResults = document.createElement('div')
     gameResults.setAttribute('class', 'game-results')
+    gameResults.setAttribute('class', 'card')
     container.appendChild(gameResults)
     const headingContainer = document.createElement('h2')
     headingContainer.innerText = "Game Results"
