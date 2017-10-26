@@ -91,6 +91,7 @@ a:hover {
     font-size: 0.9em;
     padding: 15px 0 15px 10px;
     margin: 0 0 20px 0;
+    overflow: auto;
 }
 
 .card:hover {
@@ -102,4 +103,7 @@ a:hover {
 }
 
 .game-results {
+  width: 48%;
+  float: left;
+
 }

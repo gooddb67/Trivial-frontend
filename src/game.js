@@ -71,25 +71,31 @@ class Game {
 
   renderGameResults(){
     const container = document.getElementById('main-container')
-    container.innerHTML = ''
+    const interiorDiv = document.createElement('div')
     const gameResults = document.createElement('div')
+    const allGameResults = document.createElement('div')
     gameResults.setAttribute('class', 'game-results')
-    gameResults.setAttribute('class', 'card')
-    container.appendChild(gameResults)
-    const headingContainer = document.createElement('h2')
-    headingContainer.innerText = "Game Results"
-    gameResults.appendChild(headingContainer)
+    allGameResults.setAttribute('class', 'game-results')
+    interiorDiv.setAttribute('class', 'card')
+    container.innerHTML = ''
 
-    const score = document.createElement('p')
-    score.innerText = `Score: ${this.numCorrect}/${this.numQuestions}`;
-    const timer = document.createElement('p')
-    timer.innerText = `Time Set: ${this.timer}`;
-    const difficulty = document.createElement('p')
-    difficulty.innerText = `Difficulty: ${this.difficulty}`
+    gameResults.innerHTML = `
+    <h2>Game Results</h2>
+    <p>Score: ${this.numCorrect}/${this.numQuestions}</p>
+    <p>Time Set: ${this.timer}</p>
+    <p>Difficulty: ${this.difficulty}</p>  
+    `
 
-    gameResults.appendChild(score)
-    gameResults.appendChild(timer)
-    gameResults.appendChild(difficulty)
+    allGameResults.innerHTML = `
+    <h2>All-Time Results</h2>
+    <p>Score: ${this.numCorrect}/${this.numQuestions}</p>
+    <p>Time Set: ${this.timer}</p>
+    <p>Difficulty: ${this.difficulty}</p>
+    `
+
+    container.appendChild(interiorDiv)
+    interiorDiv.appendChild(gameResults)
+    interiorDiv.appendChild(allGameResults)
     this.addRestartLinkAndListener()
   }
 
@@ -108,17 +114,7 @@ class Game {
         })
       })
     .then(res => res.json())
-    // .then(console.log)
   }
-
-  // timesUp(){
-  //   const answerLinks = document.getElementsByClassName('answer-link')
-  //   Array.from(answerLinks).forEach(function(link){
-  //     let text = link.innerText
-  //     link.parentNode.innerHTML = `<span>${text}</span>`
-  //   })
-  //   this.renderGameResults()
-  // }
 
   assignGameToQuestions(){
     this.questions.forEach(q => q.game = this)
