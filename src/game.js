@@ -61,7 +61,6 @@ class Game {
       } else if (timer !== 0 && this.numQuestions === this.numAnsweredQuestions){
         clearInterval(decTimer)
         this.postGameResults()
-        alert("YOU DID IT")
         this.renderGameResults()
       } else {
         +el.innerText--
@@ -90,6 +89,7 @@ class Game {
     gameResults.appendChild(score)
     gameResults.appendChild(timer)
     gameResults.appendChild(difficulty)
+    this.addRestartLinkAndListener()
   }
 
   postGameResults(){
@@ -116,13 +116,21 @@ class Game {
       let text = link.innerText
       link.parentNode.innerHTML = `<span>${text}</span>`
     })
-    alert("Sorry, you ran out of time! Please start again.");
-    // push results to rails api
-    location.reload();
+    this.renderGameResults()
   }
 
   assignGameToQuestions(){
     this.questions.forEach(q => q.game = this)
+  }
+
+  addRestartLinkAndListener(){
+    const restartLink = document.createElement('a');
+    restartLink.innerText = "Play again?"
+    restartLink.setAttribute('href', '#')
+    const container = document.getElementById('main-container');
+    container.appendChild(restartLink);
+
+
   }
 
 }

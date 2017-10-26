@@ -2,7 +2,7 @@
 
 body {
   font-size: 1.5em;
-  background-color: #f4efed;
+  background-color: #fff;
 }
 
 select {
@@ -20,8 +20,11 @@ input {
 
 
 button {
-  font-size: 0.5em
-
+    font-size: 0.6em;
+    font-weight: bold;
+    padding: 8px;
+    margin: 0 10px;
+    background-color: transparent;
 }
 
 input:focus {
@@ -84,7 +87,10 @@ a:hover {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     background-color: #f2e6e6;
-    font-family: helvetica
+    font-family: 'Droid Serif', serif;
+    font-size: 0.9em;
+    padding: 15px 0 15px 10px;
+    margin: 0 0 20px 0;
 }
 
 .card:hover {
