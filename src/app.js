@@ -72,6 +72,11 @@ class App {
     const container = document.getElementById('main-container')
 
     container.innerHTML = ''
+    const score = document.getElementById('score')
+    const timer = document.getElementById('timer')
+
+    score.innerHTML = ''
+    timer.innerHTML = ''
 
     container.innerHTML = `<form id="game-form">
         <label for="category">Select Category</label>
@@ -89,8 +94,7 @@ class App {
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select><br>
-        <label for="time">Set Time (in seconds)</label>
-        <input type="number" name="time" min="1" max="480" id="time-amount" value="50"><br>
+
         <label for="questions">How many questions?</label>
         <input type="number" name="questions" min="1" max="50" id="question-amount" value="10"><br>
         <input type="submit">
@@ -109,16 +113,16 @@ class App {
     e.preventDefault()
     const categorySelect = document.getElementById("category-select")
     const difficultySelect = document.getElementById("difficulty-select")
-    const timeValue = document.getElementById("time-amount").value
+    // const timeValue = document.getElementById("time-amount").value
     const questionValue = document.getElementById("question-amount").value
     const categoryValue = categorySelect.options[categorySelect.selectedIndex].dataset.id
     const difficultyValue = difficultySelect.options[difficultySelect.selectedIndex].text.toLowerCase()
-
+    const defaultTime = +questionValue * 5
     const URL = `https://opentdb.com/api.php?amount=${questionValue}&category=${categoryValue}&difficulty=${difficultyValue}&type=multiple`
 
     fetch(`${URL}`)
     .then(res => res.json())
-    .then(json => this.makeGame(json, timeValue))
+    .then(json => this.makeGame(json, defaultTime))
   }
 
   makeGame(data, timerVal){
@@ -127,7 +131,6 @@ class App {
 
     })
     let game = new Game(questions, questions[0].difficulty, timerVal, data.results.length, this, this.user);
-    console.log(this)
     game.assignGameToQuestions();
     this.user.game = game
     this.game = game

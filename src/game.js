@@ -57,7 +57,7 @@ class Game {
       if(timer === 0){
         clearInterval(decTimer)
         this.postGameResults()
-        this.timesUp()
+        this.renderGameResults()
       } else if (timer !== 0 && this.numQuestions === this.numAnsweredQuestions){
         clearInterval(decTimer)
         this.postGameResults()
@@ -71,6 +71,7 @@ class Game {
 
   renderGameResults(){
     const container = document.getElementById('main-container')
+    container.innerHTML = ''
     const gameResults = document.createElement('div')
     gameResults.setAttribute('class', 'game-results')
     gameResults.setAttribute('class', 'card')
@@ -110,14 +111,14 @@ class Game {
     // .then(console.log)
   }
 
-  timesUp(){
-    const answerLinks = document.getElementsByClassName('answer-link')
-    Array.from(answerLinks).forEach(function(link){
-      let text = link.innerText
-      link.parentNode.innerHTML = `<span>${text}</span>`
-    })
-    this.renderGameResults()
-  }
+  // timesUp(){
+  //   const answerLinks = document.getElementsByClassName('answer-link')
+  //   Array.from(answerLinks).forEach(function(link){
+  //     let text = link.innerText
+  //     link.parentNode.innerHTML = `<span>${text}</span>`
+  //   })
+  //   this.renderGameResults()
+  // }
 
   assignGameToQuestions(){
     this.questions.forEach(q => q.game = this)
