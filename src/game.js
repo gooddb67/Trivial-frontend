@@ -89,7 +89,7 @@ class Game {
     `
     console.log(allTime)
     allGameResults.innerHTML = `
-    <h2>Win Percentage</h2>
+    <h2>All-Time Percentage Correct</h2>
     <p id="big-num">${Math.floor(allTime.correct/allTime.questions * 100)}%</p>
     `
 

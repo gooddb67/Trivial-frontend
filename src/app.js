@@ -117,7 +117,7 @@ class App {
     const questionValue = document.getElementById("question-amount").value
     const categoryValue = categorySelect.options[categorySelect.selectedIndex].dataset.id
     const difficultyValue = difficultySelect.options[difficultySelect.selectedIndex].text.toLowerCase()
-    const defaultTime = +questionValue * 5
+    const defaultTime = +questionValue * 8
     const URL = `https://opentdb.com/api.php?amount=${questionValue}&category=${categoryValue}&difficulty=${difficultyValue}&type=multiple`
 
     fetch(`${URL}`)
